@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-2 sm:px-3 lg:px-4 py-2 sm:py-3 rounded-full items-center text-white text-[.25rem] sm:text-[.5rem] lg:text-[.6rem] lg:text-xs font-semibold transition duration-300 border border-white;
+    .icon {
+      @apply bg-orange-500 text-[.25rem] sm:text-[.5rem] lg:text-[.6rem] lg:text-xs transition duration-300;
+    }
+  }
+}
