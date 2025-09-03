@@ -30,11 +30,11 @@ function ProductDetails() {
   const alreadyInCart = cartItems.some((item) => item.id === productId);
 
   const handleAddToCart = () => {
-    if(!user) {
+    if (!user) {
       const proceedToLogin = window.confirm(
         "You need to login to add this product to cart. Click OK to login or Cancel to stay."
       );
-  
+
       if (proceedToLogin) {
         navigate("/signin");
       } else {
@@ -62,8 +62,19 @@ function ProductDetails() {
   };
 
   const handleHeartClick = (item) => {
+    if (!user) {
+      const proceedToLogin = window.confirm(
+        "You need to login to add this product to wishlist. Click OK to login or Cancel to stay."
+      );
+  
+      if (proceedToLogin) {
+        navigate("/signin");
+      }
+      return;
+    }
     dispatch(toggleWishList(item));
   };
+  
   const handleNavigate = () => {
     navigate(-1);
   };

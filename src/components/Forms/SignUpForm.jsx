@@ -11,6 +11,7 @@ import AuthContext from "../../context/AuthContext";
 const SignupSchema = Yup.object().shape({
   firstname: Yup.string().required("First name is required"),
   lastname: Yup.string().required("Last name is required"),
+  username: Yup.string().required("username is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string().required("Password is required"),
   confirmPassword: Yup.string().oneOf(
@@ -43,7 +44,7 @@ function SignUpForm() {
         <div className="rounded-2xl w-[40vw] md:w-[35vw] lg:w-[34vw] bg-white py-6 px-6 shadow-lg">
           <span
             onClick={() => navigate(-1)}
-            className="text-primary hover:text-secondary flex items-center gap-1 hover:underline cursor-pointer"
+            className="text-primary hover:text-secondary flex items-center w-14 gap-1 hover:underline cursor-pointer"
           >
             <IoIosArrowBack />
             <p>Back</p>
@@ -63,6 +64,7 @@ function SignUpForm() {
             initialValues={{
               firstname: "",
               lastname: "",
+              username: "",
               email: "",
               password: "",
               confirmPassword: "",
@@ -74,16 +76,20 @@ function SignUpForm() {
             validationSchema={SignupSchema}
             onSubmit={(values) => {
               const newUser = {
-                id: Date.now(), 
+                id: Date.now(),
                 firstName: values.firstname,
                 lastName: values.lastname,
+                username: values.username,
                 email: values.email,
                 password: values.password,
                 role: values.role,
                 shopname: values.shopname,
                 businessAddress: values.businessAddress,
               };
-            
+              const existingUsers =
+                JSON.parse(localStorage.getItem("users")) || [];
+              existingUsers.push(newUser);
+              localStorage.setItem("users", JSON.stringify(existingUsers));
               localStorage.setItem("user", JSON.stringify(newUser));
               setUser(newUser);
               alert("Signup success!");
@@ -160,7 +166,22 @@ function SignUpForm() {
                       )}
                     </div>
                   </div>
-
+                  <div className="mt-3">
+                    <label className="block text-sm font-medium">
+                      Username
+                    </label>
+                    <Field
+                      type="text"
+                      name="username"
+                      placeholder="Enter username"
+                      className="h-11 w-full rounded-lg border px-4 py-2.5 text-sm"
+                    />
+                    {touched.username && errors.username && (
+                      <div className="text-red-500 text-sm">
+                        {errors.username}
+                      </div>
+                    )}
+                  </div>
                   <div className="mt-3">
                     <label className="block text-sm font-medium">Email</label>
                     <Field

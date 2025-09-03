@@ -18,6 +18,7 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import AddProduct from "./components/Forms/AddProduct";
 import EditProduct from "./components/Forms/EditProduct";
 import ProductForm from "./components/Forms/ProductForm";
+import ResetPasswordForm from "./components/Forms/ResetPasswordForm";
 
 const theme = {
   colors: {
@@ -50,6 +51,7 @@ function App() {
         </Route>
         <Route path="/Signin" element={<SignInForm />} />
         <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/reset-password-form" element={<ResetPasswordForm />} />
       </Routes>
     </ThemeProvider>
   );

@@ -34,7 +34,7 @@ function TrandingProducts() {
               index <= 4 && (
                 <div
                   key={`${item.id || item.name}`}
-                  className="flex-shrink-0 py-6 lg:py-10 text-center font-semibold w-1/2 min-[425px]:w-1/3 md:w-1/4"
+                  className="flex-shrink-0 py-6 lg:py-10 text-center font-semibold w-1/2 min-[425px]:w-1/3 lg:w-1/4"
                 >
                   <div className="flex justify-center lg:mx-4">
                     <div className="relative">
@@ -54,9 +54,10 @@ function TrandingProducts() {
                           <p>{item.badge}</p>
                         </div>
                       )}
-                      <label className="text-[.8rem] md:text-lg lg:text-xl min-[2560px]:text-3xl font-bold w-20 overflow-hidden whitespace-nowrap text-ellipsis">
+                      <label className="text-[.8rem] lg:text-lg xl:text-xl min-[2560px]:text-3xl font-bold w-20 truncate">
                         {item.title}
                       </label>
+
                       <span className="flex justify-center text-[.5rem] md:text-lg lg:text-xl min-[2560px]:text-2xl">
                         <StarReview
                           stars={item.rating}

@@ -4,9 +4,10 @@ import { IoIosArrowBack } from "react-icons/io";
 import axiosInstance from "../../Config/axiosInstance";
 import Loader from "../Loader";
 import AuthContext from "../../context/AuthContext";
+import ResetPasswordForm from "../Forms/ResetPasswordForm";
 
 const UserProfile = () => {
-  const { user, logout, deleteProduct, products } = useContext(AuthContext);
+  const { user, logout, deleteProduct, products, deleteAccount } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
@@ -21,11 +22,13 @@ const UserProfile = () => {
   }, [user]);
 
   useEffect(() => {
-    const savedImage = localStorage.getItem("profileImage");
+    if(user?.id){
+      const savedImage = localStorage.getItem("profileImage");
     if (savedImage) {
       setUserData((prev) => ({ ...prev, image: savedImage }));
     }
-  }, []);
+    }
+  }, [user.id]);
 
   if (!userData) return <Loader />;
 
@@ -276,8 +279,9 @@ const UserProfile = () => {
           </div>
         </section>
 
-        <section className="mb-6 space-y-2">
-          <h2 className="text-xl font-semibold mb-3"> Crypto</h2>
+        <section className="mb-6 space-y-2 flex justify-between items-end">
+          <div>
+            <h2 className="text-xl font-semibold mb-3"> Crypto</h2>
           <p>
             <strong>Coin:</strong>{" "}
             {userData?.crypto?.coin ? userData.crypto.coin : "N/A"}
@@ -290,6 +294,15 @@ const UserProfile = () => {
             <strong>Network:</strong>{" "}
             {userData?.crypto?.network ? userData.crypto.network : "N/A"}
           </p>
+          </div>
+          <div>
+             <button
+              onClick={deleteAccount}
+              className="px-3 py-1 bg-primary hover:bg-secondary text-white rounded-md"
+            >
+              Delete Account
+            </button>
+          </div>
         </section>
       </div>
     </div>

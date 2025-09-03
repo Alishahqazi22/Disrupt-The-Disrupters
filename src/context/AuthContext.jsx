@@ -65,6 +65,19 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (formData) => {
     try {
+      const savedUsers = JSON.parse(localStorage.getItem("users")) || [];
+      const matchedUsers = savedUsers.find(
+        (u) =>
+          u.username === formData.username && u.password === formData.password
+      );
+      if (matchedUsers) {
+        setUser(matchedUsers);
+        localStorage.setItem("user", JSON.stringify(matchedUsers));
+
+        dispatch(setCartUserId(matchedUsers.id));
+        dispatch(setWishListUserId(matchedUsers.id));
+        return matchedUsers;
+      }
       const res = await axiosInstance.post("/auth/login", formData);
       const loggedInUser = {
         id: res.data.id,
@@ -81,7 +94,7 @@ export const AuthProvider = ({ children }) => {
       return loggedInUser;
     } catch (err) {
       console.error("Login error:", err);
-      throw err;
+      throw new Error("Invalid credentials");
     }
   };
 
@@ -91,6 +104,34 @@ export const AuthProvider = ({ children }) => {
     dispatch(clearWishList());
     localStorage.removeItem("user");
     navigate("/");
+  };
+
+  const resetPassword = (username, newPassword) => {
+    const savedUsers = JSON.parse(localStorage.getItem("users")) || [];
+    const updateUsers = savedUsers.map((u) =>
+      u.username === username ? { ...u, password: newPassword } : u
+    );
+    localStorage.setItem("users", JSON.stringify(updateUsers));
+    if (user && user.username === username) {
+      const upadtedUser = { ...user, password: newPassword };
+      setUser(upadtedUser);
+      localStorage.setItem("user", JSON.stringify(upadtedUser));
+    }
+  };
+
+  const deleteAccount = () => {
+    if (user) {
+      const savedUsers = JSON.parse(localStorage.getItem("users")) || [];
+      const updateUsres = savedUsers.filter((u) => u.id !== user.id);
+      localStorage.setItem("users", JSON.stringify(updateUsres));
+
+      setUser(null);
+      dispatch(clearCart());
+      dispatch(clearWishList());
+      localStorage.removeItem("user");
+
+      navigate("/");
+    }
   };
 
   useEffect(() => {
@@ -116,7 +157,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (user?.id) {
       dispatch(setCartUserId(user.id));
-      dispatch(setWishListUserId(user.id)); 
+      dispatch(setWishListUserId(user.id));
     }
   }, [user, dispatch]);
 
@@ -132,6 +173,8 @@ export const AuthProvider = ({ children }) => {
         addProduct,
         deleteProduct,
         updateProduct,
+        deleteAccount,
+        resetPassword,
       }}
     >
       {children}

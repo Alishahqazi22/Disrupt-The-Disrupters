@@ -16,14 +16,18 @@ function OurService() {
               <div className="absolute -top-8 translate-y-[100%] w-full h-40">
                 <div className="block">
                   <img
-                    className="w-5 h-7 lg:w-8 lg:h-9 ml-36 sm:ml-20 lg:ml-24 xl:ml-44 min-[2560px]:ml-[22rem]"
+                    className="w-5 h-7 lg:w-8 lg:h-9 ml-32 sm:ml-20 lg:ml-24 xl:ml-40 min-[2560px]:ml-[22rem]"
                     src={card.icon}
                     alt="icon"
                   />
                 </div>
                 <div>
-                  <h3 className="text-base lg:text-2xl min-[1440px]:text-3xl text-primary mb-6 lg:mb-12">{card.heading}</h3>
-                  <p className="text-[.9rem] lg:text-sm min-[1440px]:text-xl text-[#626262]  py-1 lg:px-1 lg:py-2 font-normal">{card.para}</p>
+                  <h3 className="text-base lg:text-2xl min-[1440px]:text-3xl text-primary mb-6 lg:mb-12">
+                    {card.heading}
+                  </h3>
+                  <p className="text-[.9rem] lg:text-sm min-[1440px]:text-xl text-[#626262]  py-1 lg:px-1 lg:py-2 font-normal">
+                    {card.para}
+                  </p>
                 </div>
               </div>
             </div>

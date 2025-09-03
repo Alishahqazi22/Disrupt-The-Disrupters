@@ -20,6 +20,7 @@ function SignInForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { user, login } = useContext(AuthContext);
+
   const handleNavigate = () => {
     navigate(-1);
   };
@@ -28,7 +29,7 @@ function SignInForm() {
     <>
       {user ? (
         <>
-        <UserProfile />
+          <UserProfile />
         </>
       ) : (
         <div className="relative h-screen w-full text-primary">
@@ -36,7 +37,7 @@ function SignInForm() {
           <div className="absolute top-28 left-1/2 -translate-y-[70%] lg:-translate-y-[30%] -translate-x-[50%] rounded-2xl my-20 w-[40vw] md:w-[35vw] lg:w-[25vw] bg-white py-2 md:py-4 px-4 md:px-5 lg:px-6">
             <span
               onClick={handleNavigate}
-              className="text-primary flex items-center gap-1 hover:underline"
+              className="text-primary flex items-center gap-1 w-14 hover:underline"
             >
               <IoIosArrowBack />
               <p>Back</p>
@@ -57,12 +58,12 @@ function SignInForm() {
                 onSubmit={async (values) => {
                   try {
                     const res = await login({
-                      username: values.username, 
+                      username: values.username,
                       password: values.password,
                     });
                     console.log("Login success:", res);
                     alert("Login success:", res);
-                    // navigate("/");
+                    navigate("/");
                   } catch (err) {
                     console.log("Login failed:", err);
                     alert("Login failed:", err);
@@ -132,6 +133,7 @@ function SignInForm() {
                               {showPassword ? <FaEyeSlash /> : <FaEye />}
                             </span>
                           </div>
+                          <Link to="/reset-password-form"><p className="text-xs hover:text-secondary mt-2 flex justify-end font-medium">Reset Password</p></Link>
                         </div>
                         <div>
                           <div className="flex items-start mb-1 mt-3">
@@ -146,11 +148,11 @@ function SignInForm() {
                             />
                             <label className="text-sm text-primary/60">
                               By creating an account you agree to our
-                              <span className="text-brand-500 underline cursor-pointer">
+                              <span className="text-brand-500 underline cursor-pointer hover:text-secondary">
                                 Terms
                               </span>{" "}
                               and{" "}
-                              <span className="text-brand-500 underline cursor-pointer">
+                              <span className="text-brand-500 underline cursor-pointer hover:text-secondary">
                                 Privacy Policy
                               </span>
                               .
