@@ -20,9 +20,9 @@ function Footer() {
           <h1 className="text-xs sm:text-sm md:text-base lg:text-xl min-[2560px]:text-4xl font-bold text-[#00A9DA]">
             Quick Links
           </h1>
-          <ul className="list-disc ml-7 md:ml-10 text-[.7rem] md:text-xs lg:text-sm min-[2560px]:text-2xl pt-4 leading-relaxed">
-            <li>Home</li>
-            <li>Shop</li>
+          <ul className="list-disc ml-7 md:ml-10 text-[.7rem] md:text-xs lg:text-sm min-[2560px]:text-2xl pt-4 sm:space-y-1">
+           <Link to="/"> <li>Home</li></Link>
+            <Link to="/allProducts"><li>Shop</li></Link>
             <li>Properties</li>
             <li>Course</li>
             <li>About Us</li>
@@ -44,7 +44,7 @@ function Footer() {
             <input
               type="text"
               placeholder="Enter your Email"
-              className="h-full w-full bg-transparent text-[.45rem] min-[375px]:text-[.5rem] sm:text-xs lg:text-base min-[2560px]:text-2xl min-[375px]:px-1 text-white placeholder:text-white flex-1"
+              className="h-full w-full bg-transparent text-[.45rem] min-[375px]:text-[.5rem] sm:text-xs lg:text-base min-[2560px]:text-2xl min-[375px]:px-1 text-white placeholder:text-white flex-1 focus:outline-none"
               />
               </div>
             <div className="flex justify-center items-center px-2 py-3 h-full bg-[#2F2F2F]">

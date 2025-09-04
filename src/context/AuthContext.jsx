@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   const fetchProducts = async () => {
     try {
       const productRes = await axiosInstance.get("/products");
-      setProducts(productRes.data.products);
+      setProducts(productRes?.data?.products);
     } catch (err) {
       console.error("Fetch products error:", err);
     }
