@@ -8,6 +8,7 @@ import logo from "../../assets/HeaderIcons/Group 1.svg";
 import * as Yup from "yup";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import UserProfile from "../UserProfile/UserProfile";
+import Loader from "../Loader";
 // import axiosInstance from "../../Config/axiosInstance";
 
 const SignupSchema = Yup.object().shape({
@@ -19,11 +20,15 @@ const SignupSchema = Yup.object().shape({
 function SignInForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const { user, login } = useContext(AuthContext);
+  const { user, login, loading, setLoading } = useContext(AuthContext);
 
   const handleNavigate = () => {
     navigate(-1);
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -61,8 +66,12 @@ function SignInForm() {
                       username: values.username,
                       password: values.password,
                     });
-                    console.log("Login success:", res);
-                    alert("Login success:", res);
+                    setLoading(true);
+                    setTimeout(() => {
+                      console.log("Login success:", res);
+                      alert("Login success:", res);
+                      setLoading(false);
+                    }, Math.random);
                     navigate("/");
                   } catch (err) {
                     console.log("Login failed:", err);
@@ -133,7 +142,11 @@ function SignInForm() {
                               {showPassword ? <FaEyeSlash /> : <FaEye />}
                             </span>
                           </div>
-                          <Link to="/reset-password-form"><p className="text-xs hover:text-secondary mt-2 flex justify-end font-medium">Reset Password</p></Link>
+                          <Link to="/reset-password-form">
+                            <p className="text-xs hover:text-secondary mt-2 flex justify-end font-medium">
+                              Reset Password
+                            </p>
+                          </Link>
                         </div>
                         <div>
                           <div className="flex items-start mb-1 mt-3">
@@ -168,9 +181,23 @@ function SignInForm() {
                         <div>
                           <button
                             type="submit"
-                            className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium transition rounded-lg bg-primary text-white shadow-theme-xs hover:bg-secondary"
+                            disabled={loading} 
+                            className={`mt-4 w-full px-4 py-3 text-sm font-medium rounded-lg text-white 
+                         ${
+                           loading
+                             ? "bg-gray-400 cursor-not-allowed"
+                             : "bg-primary hover:bg-secondary"
+                         }
+                          `}
                           >
-                            Sign In
+                            {loading ? (
+                              <div className="flex items-center justify-center gap-2">
+                                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                Please wait...
+                              </div>
+                            ) : (
+                              "Sign Up"
+                            )}
                           </button>
                         </div>
                       </div>

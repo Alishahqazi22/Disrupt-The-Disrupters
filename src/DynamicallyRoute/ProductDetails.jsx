@@ -214,7 +214,7 @@ function ProductDetails() {
               onClick={handleAddToCart}
               className="px-6 py-3 bg-primary text-white rounded-lg w-full sm:w-1/2"
             >
-              {alreadyInCart ? <p>View in Cart</p> : "Add to Cart"}
+              {alreadyInCart ? "View in Cart" : "Add to Cart"}
             </button>
             <button
               onClick={() => handleHeartClick(product)}

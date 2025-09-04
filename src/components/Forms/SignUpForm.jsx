@@ -34,6 +34,11 @@ function SignUpForm() {
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const { loading, setLoading } = useContext(AuthContext);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div
@@ -75,25 +80,29 @@ function SignUpForm() {
             }}
             validationSchema={SignupSchema}
             onSubmit={(values) => {
-              const newUser = {
-                id: Date.now(),
-                firstName: values.firstname,
-                lastName: values.lastname,
-                username: values.username,
-                email: values.email,
-                password: values.password,
-                role: values.role,
-                shopname: values.shopname,
-                businessAddress: values.businessAddress,
-              };
-              const existingUsers =
-                JSON.parse(localStorage.getItem("users")) || [];
-              existingUsers.push(newUser);
-              localStorage.setItem("users", JSON.stringify(existingUsers));
-              localStorage.setItem("user", JSON.stringify(newUser));
-              setUser(newUser);
-              alert("Signup success!");
-              navigate("/signin");
+              setLoading(true);
+              setTimeout(() => {
+                const newUser = {
+                  id: Date.now(),
+                  firstName: values.firstname,
+                  lastName: values.lastname,
+                  username: values.username,
+                  email: values.email,
+                  password: values.password,
+                  role: values.role,
+                  shopname: values.shopname,
+                  businessAddress: values.businessAddress,
+                };
+                const existingUsers =
+                  JSON.parse(localStorage.getItem("users")) || [];
+                existingUsers.push(newUser);
+                localStorage.setItem("users", JSON.stringify(existingUsers));
+                localStorage.setItem("user", JSON.stringify(newUser));
+                setUser(newUser);
+                setLoading(false);
+                alert("Signup success!");
+                navigate("/signin");
+              }, 2000);
             }}
           >
             {({ handleChange, values, errors, touched, setFieldValue }) => (
