@@ -41,7 +41,7 @@ function ReveiwSection() {
             className="mySwiper"
           >
             <SwiperSlide>
-              <div className="text-center flex justify-center px-10 lg:px-14">
+              <div className="text-center flex justify-center px-10 lg:px-20">
                 <h1 className="text-[.8rem] sm:text-[1.1rem] lg:text-[1.7rem] min-[1440px]:text-2xl font-semibold">
                   I’ve taken many online courses before, but this platform
                   stands out. The content is well-structured, the instructors
@@ -50,7 +50,7 @@ function ReveiwSection() {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="text-center flex justify-center px-10">
+              <div className="text-center flex justify-center px-10 lg:px-20">
                 <h1 className="text-[.8rem] sm:text-[1.1rem] min-[1440px]:text-2xl lg:text-[1.7rem] font-semibold">
                   I’ve taken many online courses before, but this platform
                   stands out. The content is well-structured, the instructors
