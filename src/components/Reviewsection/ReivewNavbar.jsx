@@ -20,7 +20,7 @@ function ReivewNavbar() {
             </div>
           </Link>
           <Link to="/ourCourse">
-            <div className="text-white text-[.8rem] lg:text-[1.1rem] px-3 sm:px-5 lg:px-8px-10">
+            <div className="text-white text-[.8rem] lg:text-[1.1rem] px-3 sm:px-5 lg:px-8 xl:px-10">
               <p>Course</p>
             </div>
           </Link>
