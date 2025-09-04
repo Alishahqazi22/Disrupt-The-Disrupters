@@ -54,7 +54,7 @@ function TrandingProducts() {
                           <p>{item.badge}</p>
                         </div>
                       )}
-                      <label className="text-[.8rem] lg:text-lg xl:text-xl min-[2560px]:text-3xl font-bold w-20 truncate">
+                      <label className="text-[.8rem] lg:text-lg xl:text-xl min-[2560px]:text-3xl font-bold w-20">
                         {item.title}
                       </label>
 
