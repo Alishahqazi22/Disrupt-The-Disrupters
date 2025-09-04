@@ -65,14 +65,18 @@ export const AuthProvider = ({ children }) => {
 
   const updateUser = (updatedUser) => {
     if (!user) return;
-    const savedUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const updatedUsers = savedUsers.map((u) =>
-      u.id === user.id ? { ...u, ...updatedUsers } : u
-    );
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
 
-    setUser((prev) => ({ ...prev, ...updatedUser }));
-    localStorage.setItem("user", JSON.stringify({ ...user, ...updatedUser }));
+    const savedUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+    const newUsers = savedUsers.map((u) =>
+      u.id === user.id ? { ...u, ...updatedUser } : u
+    );
+
+    localStorage.setItem("users", JSON.stringify(newUsers));
+
+    const mergedUser = { ...user, ...updatedUser };
+    setUser(mergedUser);
+    localStorage.setItem("user", JSON.stringify(mergedUser));
   };
 
   const login = async (formData) => {

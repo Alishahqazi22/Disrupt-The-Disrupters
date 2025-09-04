@@ -27,10 +27,10 @@ const EditProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateProduct(product.id, formData);
-    // navigate(-1);
+    navigate(-1);
   };
 
-  if (!product) return <Loader />;
+  if (!product) return navigate("/userProfile");
 
   return (
     <div className="w-full h-full pb-10">
@@ -151,7 +151,7 @@ const EditProduct = () => {
                 Edit
               </button> */}
             <button
-              onClick={() => deleteProduct(product.id)}
+              onClick={()=>deleteProduct(product.id)}
               className="px-6 py-3 bg-secondary text-white rounded-lg w-full sm:w-1/2 flex items-center justify-center gap-2"
             >
               Delete
