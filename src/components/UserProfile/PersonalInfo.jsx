@@ -129,7 +129,7 @@ function PersonalInfo({ userData, setUserData, isEditing }) {
           <strong>Hair:</strong>{" "}
           {isEditing ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-               <input
+              <input
                 type="text"
                 placeholder="Enter your hair color"
                 value={userData?.hair?.color || ""}

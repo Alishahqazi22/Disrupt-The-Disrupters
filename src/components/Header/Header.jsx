@@ -57,7 +57,7 @@ function Header() {
             <button
               onClick={() => {
                 setShowLaguageDropdown(!showLaguageDropdown);
-                setShowCurrencyDropdown(false); 
+                  setShowCurrencyDropdown(false);
               }}
               className="flex items-center gap-2"
             >
@@ -99,7 +99,7 @@ function Header() {
             <button
               onClick={() => {
                 setShowCurrencyDropdown(!showCurrencyDropdown);
-                setShowLaguageDropdown(false); 
+                setShowLaguageDropdown(false);
               }}
               className="flex items-center gap-2"
             >
