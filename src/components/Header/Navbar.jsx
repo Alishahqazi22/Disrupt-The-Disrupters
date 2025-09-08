@@ -16,6 +16,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 function Navbar() {
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [value, setvalue] = useState("");
   const { user } = useContext(AuthContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const cartItems = useSelector((state) => state.cart.items);
@@ -45,11 +46,11 @@ function Navbar() {
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100 }}
-        className="h-[3.5rem] sm:h-[5rem] lg:h-[6.5rem] flex justify-between px-4  min-[425px]:px-10 xl:px-20 items-center w-full shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
+        className="h-[3.5rem] sm:h-[5rem] lg:h-[6.5rem] flex justify-between px-4  sm:px-14 xl:px-10 items-center w-full shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
       >
         <div className="flex items-center gap-3">
           <button
-            className="md:block lg:hidden text-2xl"
+            className="lg:block xl:hidden text-2xl"
             onClick={() => setSidebarOpen(true)}
           >
             <FiMenu />
@@ -63,7 +64,7 @@ function Navbar() {
             />
           </NavLink>
         </div>
-        <div onMouseLeave={handleMouseLeave} className="hidden lg:flex">
+        <div onMouseLeave={handleMouseLeave} className="hidden xl:flex">
           {hoverStyle && (
             <div
               className="absolute rounded-full bg-gray-200 z-0 transition-all duration-300 ease-in-out pointer-events-none"
@@ -113,9 +114,11 @@ function Navbar() {
                 exit={{ width: 0, opacity: 0 }}
                 transition={{ duration: 0.3 }}
                 type="text"
+                value={value}
+                onChange={(e) => setvalue(e.target.value, console.log(value))}
                 placeholder="Search"
                 autoFocus
-                className="absolute right-32 sm:right-36 lg:right-40 z-50 translate-y-0 my-auto h-8 sm:h-10 rounded-full px-4 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="absolute right-32 sm:right-[11.5rem] lg:right-[12.6rem] z-50 translate-y-0 my-auto  h-8 sm:h-10 rounded-full px-4 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             )}
           </AnimatePresence>
